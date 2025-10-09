@@ -36,14 +36,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('jobs.index') }}">Browse Jobs</a>
                     </li>
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('jobs.create') }}">Post Job</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('jobs.my-jobs') }}">My Jobs</a>
-                        </li>
-                    @endauth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('jobs.create') }}">Post Job</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('jobs.my-jobs') }}">All Jobs Manager</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     @guest

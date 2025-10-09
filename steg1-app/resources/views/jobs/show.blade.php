@@ -86,23 +86,19 @@
                     <small class="text-muted">
                         <i class="fas fa-clock me-1"></i>Posted {{ $job->created_at->diffForHumans() }}
                     </small>
-                    @auth
-                        @can('update', $job)
-                            <div>
-                                <a href="{{ route('jobs.edit', $job) }}" class="btn btn-outline-primary btn-sm me-2">
-                                    <i class="fas fa-edit me-1"></i>Edit
-                                </a>
-                                <form action="{{ route('jobs.destroy', $job) }}" method="POST" class="d-inline" 
-                                      onsubmit="return confirm('Are you sure you want to delete this job?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                                        <i class="fas fa-trash me-1"></i>Delete
-                                    </button>
-                                </form>
-                            </div>
-                        @endcan
-                    @endauth
+                    <div>
+                        <a href="{{ route('jobs.edit', $job) }}" class="btn btn-outline-primary btn-sm me-2">
+                            <i class="fas fa-edit me-1"></i>Edit
+                        </a>
+                        <form action="{{ route('jobs.destroy', $job) }}" method="POST" class="d-inline" 
+                              onsubmit="return confirm('Are you sure you want to delete this job?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-trash me-1"></i>Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,24 +110,23 @@
                 <h5><i class="fas fa-paper-plane me-2"></i>Apply for this Job</h5>
             </div>
             <div class="card-body text-center">
-                @guest
-                    <p class="text-muted">Please login to apply for this job</p>
-                    <a href="{{ route('login') }}" class="btn btn-primary">
-                        <i class="fas fa-sign-in-alt me-2"></i>Login to Apply
-                    </a>
-                @else
-                    @if(Auth::id() === $job->user_id)
-                        <p class="text-muted">This is your job posting</p>
-                        <a href="{{ route('jobs.edit', $job) }}" class="btn btn-outline-primary">
-                            <i class="fas fa-edit me-2"></i>Edit Job
-                        </a>
-                    @else
-                        <p class="text-muted">Ready to apply?</p>
-                        <button class="btn btn-primary" onclick="alert('Application functionality not implemented yet')">
-                            <i class="fas fa-paper-plane me-2"></i>Apply Now
-                        </button>
-                    @endif
-                @endguest
+                <p class="text-muted">Ready to apply?</p>
+                <button class="btn btn-primary" onclick="alert('Application functionality will be implemented later')">
+                    <i class="fas fa-paper-plane me-2"></i>Apply Now
+                </button>
+                <hr>
+                <p class="text-muted small">Job Management (Testing Mode)</p>
+                <a href="{{ route('jobs.edit', $job) }}" class="btn btn-outline-primary btn-sm me-2">
+                    <i class="fas fa-edit me-1"></i>Edit Job
+                </a>
+                <form action="{{ route('jobs.destroy', $job) }}" method="POST" class="d-inline" 
+                      onsubmit="return confirm('Are you sure you want to delete this job?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        <i class="fas fa-trash me-1"></i>Delete
+                    </button>
+                </form>
             </div>
         </div>
 

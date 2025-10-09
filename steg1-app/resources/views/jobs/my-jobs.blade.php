@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'My Jobs - FreelanceHub')
+@section('title', 'Job Manager - FreelanceHub')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1><i class="fas fa-briefcase me-2"></i>My Jobs</h1>
+    <h1><i class="fas fa-briefcase me-2"></i>Job Manager <small class="text-muted">(All Jobs)</small></h1>
     <a href="{{ route('jobs.create') }}" class="btn btn-primary">
         <i class="fas fa-plus me-2"></i>Post New Job
     </a>

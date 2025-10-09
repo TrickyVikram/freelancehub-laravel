@@ -8,14 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class JobController extends Controller
 {
     /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['index', 'show']);
-    }
-
-    /**
      * Display a listing of the jobs.
      */
     public function index()
@@ -60,8 +52,8 @@ class JobController extends Controller
             $validated['skills'] = array_map('trim', explode(',', $validated['skills']));
         }
 
-        // Add user_id
-        $validated['user_id'] = Auth::id();
+        // Add default user_id for testing (no auth required)
+        $validated['user_id'] = 1; // Default test user
 
         Job::create($validated);
 
@@ -81,7 +73,6 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        $this->authorize('update', $job);
         return view('jobs.edit', compact('job'));
     }
 
@@ -90,7 +81,6 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        $this->authorize('update', $job);
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -122,20 +112,17 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        $this->authorize('delete', $job);
-        
         $job->delete();
 
         return redirect()->route('jobs.index')->with('success', 'Job deleted successfully!');
     }
 
     /**
-     * Display jobs posted by the authenticated user.
+     * Display all jobs for management (testing mode - no auth).
      */
     public function myJobs()
     {
-        $jobs = Job::where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
+        $jobs = Job::orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('jobs.my-jobs', compact('jobs'));

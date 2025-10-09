@@ -17,4 +17,4 @@ Route::get('/quick-login', [AuthController::class, 'quickLogin'])->name('quick-l
 
 // Job routes
 Route::resource('jobs', JobController::class);
-Route::get('/my-jobs', [JobController::class, 'myJobs'])->name('jobs.my-jobs')->middleware('auth');
+Route::get('/my-jobs', [JobController::class, 'myJobs'])->name('jobs.my-jobs');
