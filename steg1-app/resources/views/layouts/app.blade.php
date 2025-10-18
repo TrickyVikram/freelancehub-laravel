@@ -46,21 +46,38 @@
                 <ul class="navbar-nav">
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('quick-login') }}" title="Quick login for testing">
                                 <i class="fas fa-user-check"></i> Test Login
                             </a>
                         </li>
+                        @if(app()->environment(['testing', 'local']))
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" href="{{ route('mock-oauth.page') }}" title="Mock OAuth for testing">
+                                    <i class="fas fa-flask"></i> Mock OAuth
+                                </a>
+                            </li>
+                        @endif
                     @else
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-user me-1"></i>{{ Auth::user()->name }}
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{{ route('jobs.my-jobs') }}">
                                     <i class="fas fa-briefcase me-2"></i>My Jobs
+                                </a></li>
+                                <li><a class="dropdown-item" href="{{ route('password.request') }}">
+                                    <i class="fas fa-key me-2"></i>Change Password
                                 </a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
