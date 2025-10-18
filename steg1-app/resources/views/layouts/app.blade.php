@@ -17,27 +17,49 @@
         .card:hover {
             transform: translateY(-2px);
         }
+        .navbar {
+            z-index: 1000 !important;
+        }
         .navbar-brand {
-            font-weight: bold;
+            font-weight: bold !important;
+            color: white !important;
+            font-size: 1.5rem !important;
+        }
+        .navbar-nav {
+            gap: 0.5rem;
         }
         .navbar-nav .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95) !important;
+            margin: 0 0.25rem !important;
+            font-weight: 500 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            white-space: nowrap;
+            font-size: 0.95rem;
         }
         .navbar-nav .nav-link:hover {
             color: white !important;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0.25rem;
+            transition: all 0.2s ease;
         }
         .navbar-nav .nav-item {
-            display: flex;
-            align-items: center;
+            display: flex !important;
+            align-items: center !important;
         }
         .text-warning {
             color: #ffc107 !important;
         }
         .dropdown-menu {
             min-width: 200px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.3) !important;
+        }
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255,255,255,0.25) !important;
+            outline: 0;
         }
     </style>
 </head>
@@ -51,6 +73,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Left Navigation -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('jobs.index') }}">
@@ -68,31 +91,11 @@
                         </a>
                     </li>
                 </ul>
+
+                <!-- Right Navigation -->
                 <ul class="navbar-nav ms-auto">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">
-                                <i class="fas fa-sign-in-alt me-1"></i>Login
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">
-                                <i class="fas fa-user-plus me-1"></i>Register
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('quick-login') }}" title="Quick login for testing">
-                                <i class="fas fa-user-check me-1"></i>Test Login
-                            </a>
-                        </li>
-                        @if(app()->environment(['testing', 'local']))
-                            <li class="nav-item">
-                                <a class="nav-link text-warning" href="{{ route('mock-oauth.page') }}" title="Mock OAuth for testing">
-                                    <i class="fas fa-flask me-1"></i>Mock OAuth
-                                </a>
-                            </li>
-                        @endif
-                    @else
+                    @auth
+                        <!-- User is logged in -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-circle me-1"></i>{{ Auth::user()->name }}
@@ -115,7 +118,31 @@
                                 </li>
                             </ul>
                         </li>
-                    @endguest
+                    @else
+                        <!-- User is not logged in -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('quick-login') }}" title="Quick login for testing">
+                                <i class="fas fa-user-check me-1"></i>Test Login
+                            </a>
+                        </li>
+                        @if(app()->environment(['testing', 'local']))
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" href="{{ route('mock-oauth.page') }}" title="Mock OAuth for testing">
+                                    <i class="fas fa-flask me-1"></i>Mock OAuth
+                                </a>
+                            </li>
+                        @endif
+                    @endauth
                 </ul>
             </div>
         </div>
