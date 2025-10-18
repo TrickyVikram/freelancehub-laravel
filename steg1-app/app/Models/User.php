@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'provider',
+        'provider_id',
+        'role',
+        'is_admin',
     ];
 
     /**
@@ -52,5 +56,37 @@ class User extends Authenticatable
     public function jobs()
     {
         return $this->hasMany(Job::class);
+    }
+
+    /**
+     * Get the user's profile information.
+     */
+    public function userInfo()
+    {
+        return $this->hasOne(UserInfo::class);
+    }
+
+    /**
+     * Get the user's admin record if they are an admin.
+     */
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    /**
+     * Get proposals submitted by the user.
+     */
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
+    }
+
+    /**
+     * Check if the user is an admin.
+     */
+    public function isAdmin()
+    {
+        return $this->is_admin || $this->admin()->exists();
     }
 }
