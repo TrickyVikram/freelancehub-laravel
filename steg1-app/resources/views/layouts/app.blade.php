@@ -8,8 +8,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
         }
         .card {
             transition: transform 0.2s;
@@ -19,14 +24,24 @@
         }
         .navbar {
             z-index: 1000 !important;
+            position: static !important;
+            width: 100% !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: flex !important;
         }
         .navbar-brand {
             font-weight: bold !important;
             color: white !important;
             font-size: 1.5rem !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         .navbar-nav {
             gap: 0.5rem;
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         .navbar-nav .nav-link {
             color: rgba(255, 255, 255, 0.95) !important;
@@ -36,16 +51,27 @@
             align-items: center !important;
             white-space: nowrap;
             font-size: 0.95rem;
+            visibility: visible !important;
+            opacity: 1 !important;
+            height: auto !important;
+            overflow: visible !important;
+            clip: auto !important;
+            position: static !important;
         }
         .navbar-nav .nav-link:hover {
             color: white !important;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 0.25rem;
             transition: all 0.2s ease;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         .navbar-nav .nav-item {
             display: flex !important;
             align-items: center !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            height: auto !important;
         }
         .text-warning {
             color: #ffc107 !important;
@@ -53,6 +79,8 @@
         .dropdown-menu {
             min-width: 200px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         .navbar-toggler {
             border: 1px solid rgba(255,255,255,0.3) !important;
@@ -60,6 +88,16 @@
         .navbar-toggler:focus {
             box-shadow: 0 0 0 0.25rem rgba(255,255,255,0.25) !important;
             outline: 0;
+        }
+        .collapse.show {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        .navbar-collapse {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
     </style>
 </head>
