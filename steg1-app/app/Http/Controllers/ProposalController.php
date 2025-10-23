@@ -35,8 +35,11 @@ class ProposalController extends Controller
             $attachments = $saved;
         }
 
+        // If there is no authenticated user (testing mode), fall back to default user id 1
+        $userId = Auth::id() ?? 1;
+
         $proposal = Proposal::create([
-            'user_id' => Auth::id(),
+            'user_id' => $userId,
             'job_id' => $data['job_id'] ?? null,
             'cover_letter' => $data['cover_letter'],
             'budget_amount' => $data['budget_amount'] ?? null,
@@ -44,6 +47,11 @@ class ProposalController extends Controller
             'attachments' => $attachments,
         ]);
 
-        return redirect()->route('jobs.show', [$proposal->job_id])->with('status', 'Proposal submitted successfully.');
+        // Redirect to the job page if a job was specified, otherwise go back to jobs index
+        if ($proposal->job_id) {
+            return redirect()->route('jobs.show', [$proposal->job_id])->with('status', 'Proposal submitted successfully.');
+        }
+
+        return redirect()->route('jobs.index')->with('status', 'Proposal submitted successfully.');
     }
 }

@@ -36,10 +36,34 @@
                             <i class="fas fa-sign-in-alt me-2"></i>Login
                         </button>
                     </div>
+
+                    <div class="text-center mt-3">
+                        <small>
+                            <a href="{{ route('password.request') }}" class="text-muted">Forgot your password?</a>
+                        </small>
+                    </div>
                 </form>
 
                 <hr class="my-4">
-                
+
+                <div class="text-center mb-3">
+                    <p class="small">Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
+                </div>
+
+                <div class="text-center mb-4">
+                    <h6 class="text-muted mb-3">Or sign in with</h6>
+                    <div class="btn-group-vertical w-100" role="group">
+                        <a href="{{ route('oauth.redirect', 'google') }}" class="btn btn-outline-danger">
+                            <i class="fab fa-google me-2"></i>Sign in with Google
+                        </a>
+                        <a href="{{ route('oauth.redirect', 'github') }}" class="btn btn-outline-dark mt-2">
+                            <i class="fab fa-github me-2"></i>Sign in with GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
                 <div class="text-center">
                     <h6 class="text-muted">Quick Testing Login</h6>
                     <p class="small text-muted">For testing the Job CRUD functionality</p>
@@ -51,6 +75,14 @@
                             Email: test@example.com | Password: password
                         </small>
                     </div>
+
+                    @if(app()->environment(['testing', 'local']))
+                        <hr class="my-3">
+                        <p class="small text-info mb-2"><i class="fas fa-flask me-1"></i>Testing Mode</p>
+                        <a href="{{ route('mock-oauth.page') }}" class="btn btn-info btn-sm">
+                            <i class="fas fa-flask me-1"></i>Mock OAuth Test
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

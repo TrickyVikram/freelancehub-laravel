@@ -130,11 +130,11 @@
             </div>
         </div>
 
-        <div class="card shadow mt-4">
-            <div class="card-header">
-                <h6><i class="fas fa-info-circle me-2"></i>Job Summary</h6>
-            </div>
-            <div class="card-body">
+            <div class="card shadow mt-4">
+                <div class="card-header">
+                    <h6><i class="fas fa-info-circle me-2"></i>Job Summary</h6>
+                </div>
+                <div class="card-body">
                 <div class="row g-2">
                     <div class="col-6">
                         <small class="text-muted d-block">Type</small>
@@ -159,6 +159,8 @@
         </div>
     </div>
 </div>
+
+@include('proposals._job_proposals', ['job' => $job])
 
 <div class="mt-4">
     <a href="{{ route('jobs.index') }}" class="btn btn-secondary">

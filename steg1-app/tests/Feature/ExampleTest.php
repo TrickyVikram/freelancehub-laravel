@@ -14,6 +14,7 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        // Root redirects to jobs index; assert redirect (don't follow to avoid DB access in this simple test)
+        $response->assertStatus(302);
     }
 }
